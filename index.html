@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo de Adivinhação de Cores</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      #game {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Jogo de Adivinhação de Cores</h1>
+    <div id="game">
+      <p id="prompt">Estou pensando em uma dessas cores:</p>
+      <p id="colors"></p>
+      <p>Qual cor estou pensando?</p>
+      <input type="text" id="guess" placeholder="Digite sua resposta aqui" />
+      <button onclick="checkGuess()">Enviar</button>
+      <p id="feedback"></p>
+    </div>
+
+    <script>
+      const allColors = [
+        "AliceBlue",
+        "AntiqueWhite",
+        "Aqua",
+        "Aquamarine",
+        "Azure",
+        "Beige",
+        "Bisque",
+        "Black",
+        "BlanchedAlmond",
+        "Blue",
+        "BlueViolet",
+        "Brown",
+        "BurlyWood",
+        "CadetBlue",
+        "Chartreuse",
+        "Chocolate",
+        "Coral",
+        "CornflowerBlue",
+        "Cornsilk",
+        "Crimson",
+        "Cyan",
+        "DarkBlue",
+        "DarkCyan",
+        "DarkGoldenRod",
+        "DarkGray",
+        "DarkGreen",
+        "DarkKhaki",
+        "DarkMagenta",
+        "DarkOliveGreen",
+        "DarkOrange",
+        "DarkOrchid",
+        "DarkRed",
+        "DarkSalmon",
+        "DarkSeaGreen",
+        "DarkSlateBlue",
+        "DarkSlateGray",
+        "DarkTurquoise",
+        "DarkViolet",
+        "DeepPink",
+        "DeepSkyBlue",
+        "DimGray",
+        "DodgerBlue",
+        "FireBrick",
+        "FloralWhite",
+        "ForestGreen",
+        "Fuchsia",
+        "Gainsboro",
+        "GhostWhite",
+        "Gold",
+        "GoldenRod",
+        "Gray",
+        "Green",
+        "GreenYellow",
+        "HoneyDew",
+        "HotPink",
+        "IndianRed",
+        "Indigo",
+        "Ivory",
+        "Khaki",
+        "Lavender",
+        "LavenderBlush",
+        "LawnGreen",
+        "LemonChiffon",
+        "LightBlue",
+        "LightCoral",
+        "LightCyan",
+        "LightGoldenRodYellow",
+        "LightGray",
+        "LightGreen",
+        "LightPink",
+        "LightSalmon",
+        "LightSeaGreen",
+        "LightSkyBlue",
+        "LightSlateGray",
+        "LightSteelBlue",
+        "LightYellow",
+        "Lime",
+        "LimeGreen",
+        "Linen",
+        "Magenta",
+        "Maroon",
+        "MediumAquaMarine",
+        "MediumBlue",
+        "MediumOrchid",
+        "MediumPurple",
+        "MediumSeaGreen",
+        "MediumSlateBlue",
+        "MediumSpringGreen",
+        "MediumTurquoise",
+        "MediumVioletRed",
+        "MidnightBlue",
+        "MintCream",
+        "MistyRose",
+        "Moccasin",
+        "NavajoWhite",
+        "Navy",
+        "OldLace",
+        "Olive",
+        "OliveDrab",
+        "Orange",
+        "OrangeRed",
+        "Orchid",
+        "PaleGoldenRod",
+        "PaleGreen",
+        "PaleTurquoise",
+        "PaleVioletRed",
+        "PapayaWhip",
+        "PeachPuff",
+        "Peru",
+        "Pink",
+        "Plum",
+        "PowderBlue",
+        "Purple",
+        "RebeccaPurple",
+        "Red",
+        "RosyBrown",
+        "RoyalBlue",
+        "SaddleBrown",
+        "Salmon",
+        "SandyBrown",
+        "SeaGreen",
+        "SeaShell",
+        "Sienna",
+        "Silver",
+        "SkyBlue",
+        "SlateBlue",
+        "SlateGray",
+        "Snow",
+        "SpringGreen",
+        "SteelBlue",
+        "Tan",
+        "Teal",
+        "Thistle",
+        "Tomato",
+        "Turquoise",
+        "Violet",
+        "Wheat",
+        "White",
+        "WhiteSmoke",
+        "Yellow",
+        "YellowGreen",
+      ];
+
+      const selectedColors = allColors
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 10);
+
+      const secretColor =
+        selectedColors[Math.floor(Math.random() * selectedColors.length)];
+
+      document.getElementById("colors").innerText = selectedColors.join(", ");
+
+      function checkGuess() {
+        const guess = document.getElementById("guess").value.trim();
+        const feedback = document.getElementById("feedback");
+
+        if (guess.toLowerCase() === secretColor.toLowerCase()) {
+          feedback.innerText = `Parabéns! Você acertou. A cor era ${secretColor}!`;
+          document.body.style.backgroundColor = secretColor;
+        } else {
+          const hint =
+            guess.toLowerCase() < secretColor.toLowerCase()
+              ? "A cor é depois na ordem alfabética."
+              : "A cor é antes na ordem alfabética.";
+          feedback.innerText = `Errado! ${hint}`;
+        }
+      }
+    </script>
+  </body>
+</html>
